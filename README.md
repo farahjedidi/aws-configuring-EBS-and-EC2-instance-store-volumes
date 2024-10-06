@@ -44,47 +44,47 @@ Before starting, I use the following one-click deployment link to automatically 
 
 
 - Listed block devices:
-```lsblk```
+lsblk
 - Checked for existing file systems on the block device:
-```sudo file -s /dev/xvdf```
+sudo file -s /dev/xvdf
 Note: There is no file system present.
 - Created a new file system:
-```sudo mkfs -t xfs /dev/xvdf
-sudo file -s /dev/xvdf```
+sudo mkfs -t xfs /dev/xvdf
+sudo file -s /dev/xvdf
 
 - ![fs](https://github.com/user-attachments/assets/f7dd2894-3236-4af4-8008-2675da84b19c)
 
 - Created a mount point:
-```sudo mkdir /ebstest```
+sudo mkdir /ebstest
 - Mounted the EBS volume:
-```sudo mount /dev/xvdf /ebstest```
+sudo mount /dev/xvdf /ebstest
 - Navigated to the mount point:
-```cd /ebstest```
+cd /ebstest
 - Created a test file:
-```sudo nano testfile.txt```
+sudo nano testfile.txt
 Added the message "the file system works"
 - Verified the file creation:
-```ls -la```
+ls -la
 - Rebooted the A4L-EBS-INSTANCE1-AZA instance:
-```sudo reboot```
+sudo reboot
 
 - ![testfile reboot](https://github.com/user-attachments/assets/6010ac93-0411-49cd-8a32-c96f4eeb7002)
 
 
 - reconnected using EC2 Instance Connect and checked file systems:
-```df -k```
+df -k
 Note: The file system isn't displayed because I have manually mounted the file system before the reboot and need to make it automatically mounted at boot.
 - Listed block device UUIDs:
-```sudo blkid```
+sudo blkid
 -Edited the fstab file to ensure the filesystem is automatically mounted at boot (because I mounted it manually at first which is not convenient) and I added the following line:
 UUID=c46fa933-0eeb-47f9-b3c9-c260bf76e5d3  /ebstest  xfs  defaults,nofail
-```sudo nano /etc/fstab```
+sudo nano /etc/fstab
 - Remounted all filesystems:
-```sudo mount -a```
+sudo mount -a
 - Verified the file still exists and re-checked disk space where we can see the /dev/xvdf file system:
-```cd /ebstest
+cd /ebstest
 ls -la
-df -k```
+df -k
 
 - ![df-k](https://github.com/user-attachments/assets/1869d477-bad4-4aa5-8583-abf37a9e158e)
 
@@ -100,12 +100,12 @@ df -k```
 - Attached the EBS volume to A4L-EBS-INSTANCE2-AZA instance.
 - Connected to Instance 2 and ran the following commands to verify the volume is mounted correctly which is the case because we can see the testfile.txt:
 
-```lsblk
+lsblk
 sudo file -s /dev/xvdf
 sudo mkdir /ebstest
 sudo mount /dev/xvdf /ebstest
 cd /ebstest
-ls -la```
+ls -la
 
 - ![ebs](https://github.com/user-attachments/assets/9319fb35-a6e7-4848-b3df-6e38199b1f6d)
 
