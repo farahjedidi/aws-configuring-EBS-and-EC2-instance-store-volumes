@@ -1,4 +1,4 @@
-# Demo: Configuring EBS and EC2 Instance Store Volumes in AWS
+# Demo: Configuring EBS volumes in AWS
 
 ## Overview
 In this Demo, I interact with Elastic Block Store (EBS) and EC2 instances in AWS. The goal is to move volumes between instances. Here's what I will accomplish:
